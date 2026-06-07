@@ -6761,6 +6761,7 @@ function renderHomeSections() {
       );
     }
   })();
+	renderCollection(sectionId, section.url, section.title);
 
     renderSectionsByCountry();
     window.scrollTo(0, 0);
@@ -6865,10 +6866,7 @@ const countrySectionOrder = {
 
 // Main function to render sections based on country
 async function renderSectionsByCountry() {
-  const country = await getVisitorCountry();
-  console.log(`Visitor country detected: ${country}`);
-  
-  const sections = countrySectionOrder[country] || countrySectionOrder['Unknown']; // Use fallback if country not mapped
+  const sections = countrySectionOrder['Unknown']; 
   
   // Render in the prioritized order (loop through the array)
   sections.forEach((section, index) => {
