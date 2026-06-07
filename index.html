@@ -9,7 +9,7 @@
   <meta name="description" content="Kissout App Asian Drama, movies & TV shows online or stream right to your smart TV, game console, PC, Mac, mobile, tablet and more." />
   <meta name="keywords" content="KissOut, Kissout App, Kiss Out, Watch Asian Drama , Chinese Drama, Korean Drama. TV shows online, anime , drama series, OTT platform" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://kissout.netlify.app/" />
+  <link rel="canonical" href="/" />
 
   <!-- Favicon & Icons -->
   <link rel="icon" type="image/png" sizes="32x32" href="/icons/pwa512.png" />
@@ -23,7 +23,7 @@
   <!-- Open Graph Tags (for Facebook, WhatsApp, etc.) -->
   <meta property="og:title" content="KissOut - Watch Asian Drama, TV Shows, Movies & Animes Online" />
   <meta property="og:image" content="/icons/apple-touch-icon.png" />
-  <meta property="og:description" content="Stream the best Asian Dramas, Chinese Dramas, and Korean Dramas for free on Kissout." />
+  <meta property="og:description" content="Stream favourite Asian Dramas, Chinese Dramas, and Korean Dramas for free on Kissout" />
   
   <meta property="og:url" content="/" />
   <meta property="og:type" content="website" />
@@ -31,7 +31,7 @@
 
   <!-- Twitter Card Tags -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="KissOut - Best Site for Asian Drama & Anime" />
+  <meta name="twitter:title" content="KissOut - Watch Asian Drama, TV Shows, Movies & Animes Online" />
   <meta name="twitter:description" content="Watch Chinese, Korean, and Japanese dramas without limits on KissOut." />
   <meta name="twitter:image" content="/icons/apple-touch-icon.png" />
   <meta name="twitter:site" content="@Kissout_in" />
@@ -6775,39 +6775,94 @@ async function getVisitorCountry() {
   } catch (error) {
     console.error('Error fetching country:', error);
     return 'Unknown'; // Fallback on error (e.g., network issues)
+  }
+}
+
+// Mapping of country to prioritized section order
+// Add more countries as needed; each value is an array of {url, title} objects in desired render order
 const countrySectionOrder = {
-  "India": [
-    { url: kdramaUrl, title: "Korean TV Shows" },
-    { url: cdramaUrl, title: "Chinese TV Shows" },
-    { url: animeUrl, title: "Anime" },
-    { url: southUrl, title: "South Indian Cinema" }
+  'India': [
+	{url: bollywoodUrl, title: 'Bollywood Movies' },
+	{ url: southUrl, title: 'South Indian Cinema' },
+    { url: hollywoodUrl, title: 'Hollywood Movies' },
+    { url: usTvUrl, title: 'US TV Shows' },
+    { url: kdramaUrl, title: 'Korean TV Shows' },
+	{ url: indianTv, title: 'Indian TV Shows' },
+    { url: cdramaUrl, title: 'Chinese TV Shows' },
+    { url: animeUrl, title: 'Anime' },
+    { url: mcuUrl, title: 'Marvel Collection' },
+    { url: wweUrl, title: 'WWE' },
+    { url: animationUrl, title: 'Animated Movies' }
   ],
-  "United States": [
-    { url: kdramaUrl, title: "Korean TV Shows" },
-    { url: cdramaUrl, title: "Chinese TV Shows" },
-    { url: animeUrl, title: "Anime" }
+  'United States': [
+    { url: hollywoodUrl, title: 'Hollywood Movies' },     // Prioritize US/Hollywood content
+    { url: usTvUrl, title: 'US TV Shows' },
+    { url: mcuUrl, title: 'Marvel Collection' },
+    { url: wweUrl, title: 'WWE' },
+    { url: animationUrl, title: 'Animated Movies' },
+    { url: bollywoodUrl, title: 'Bollywood Movies' },
+    { url: southUrl, title: 'South Indian Cinema' },
+    { url: indianTv, title: 'Indian TV Shows' },
+    { url: kdramaUrl, title: 'Korean TV Shows' },
+    { url: cdramaUrl, title: 'Chinese TV Shows' },
+    { url: animeUrl, title: 'Anime' }
   ],
-  "South Korea": [
-    { url: kdramaUrl, title: "Korean TV Shows" },
-    { url: animeUrl, title: "Anime" },
-    { url: cdramaUrl, title: "Chinese TV Shows" }
+  'South Korea': [
+    { url: kdramaUrl, title: 'Korean TV Shows' },         // Prioritize Korean content
+    { url: animeUrl, title: 'Anime' },
+    { url: cdramaUrl, title: 'Chinese TV Shows' },
+    { url: hollywoodUrl, title: 'Hollywood Movies' },
+    { url: usTvUrl, title: 'US TV Shows' },
+    { url: bollywoodUrl, title: 'Bollywood Movies' },
+    { url: southUrl, title: 'South Indian Cinema' },
+    { url: indianTv, title: 'Indian TV Shows' },
+    { url: mcuUrl, title: 'Marvel Collection' },
+    { url: wweUrl, title: 'WWE' },
+    { url: animationUrl, title: 'Animated Movies' }
   ],
-  "China": [
-    { url: cdramaUrl, title: "Chinese TV Shows" },
-    { url: kdramaUrl, title: "Korean TV Shows" },
-    { url: animeUrl, title: "Anime" }
+  'China': [
+    { url: cdramaUrl, title: 'Chinese TV Shows' },        // Prioritize Chinese content
+    { url: kdramaUrl, title: 'Korean TV Shows' },
+    { url: animeUrl, title: 'Anime' },
+    { url: hollywoodUrl, title: 'Hollywood Movies' },
+    { url: usTvUrl, title: 'US TV Shows' },
+    { url: bollywoodUrl, title: 'Bollywood Movies' },
+    { url: southUrl, title: 'South Indian Cinema' },
+    { url: indianTv, title: 'Indian TV Shows' },
+    { url: mcuUrl, title: 'Marvel Collection' },
+    { url: wweUrl, title: 'WWE' },
+    { url: animationUrl, title: 'Animated Movies' }
   ],
-  "Japan": [
-    { url: animeUrl, title: "Anime" },
-    { url: kdramaUrl, title: "Korean TV Shows" },
-    { url: cdramaUrl, title: "Chinese TV Shows" }
+  'Japan': [
+    { url: animeUrl, title: 'Anime' },                    // Prioritize Anime
+    { url: kdramaUrl, title: 'Korean TV Shows' },
+    { url: cdramaUrl, title: 'Chinese TV Shows' },
+    { url: hollywoodUrl, title: 'Hollywood Movies' },
+    { url: usTvUrl, title: 'US TV Shows' },
+    { url: bollywoodUrl, title: 'Bollywood Movies' },
+    { url: southUrl, title: 'South Indian Cinema' },
+    { url: indianTv, title: 'Indian TV Shows' },
+    { url: mcuUrl, title: 'Marvel Collection' },
+    { url: wweUrl, title: 'WWE' },
+    { url: animationUrl, title: 'Animated Movies' }
   ],
-  "Unknown": [
-    { url: kdramaUrl, title: "Korean TV Shows" },
-    { url: cdramaUrl, title: "Chinese TV Shows" },
-    { url: animeUrl, title: "Anime" }
+  'Unknown': [                                             // Default/fallback order (your current order)
+    { url: hollywoodUrl, title: 'Hollywood Movies' },
+	{ url: bollywoodUrl, title: 'Bollywood Movies' },
+    { url: southUrl, title: 'South Indian Cinema' },
+    { url: kdramaUrl, title: 'Korean TV Shows' },
+    { url: indianTv, title: 'Indian TV Shows' },
+    { url: cdramaUrl, title: 'Chinese TV Shows' },
+    { url: animeUrl, title: 'Anime' },
+    { url: usTvUrl, title: 'US TV Shows' },
+    { url: mcuUrl, title: 'Marvel Collection' },
+    { url: wweUrl, title: 'WWE' },
+    { url: animationUrl, title: 'Animated Movies' }
   ]
+  // Add more countries here, e.g., 'Canada': [...], 'United Kingdom': [...]
 };
+
+// Main function to render sections based on country
 async function renderSectionsByCountry() {
   const country = await getVisitorCountry();
   console.log(`Visitor country detected: ${country}`);
