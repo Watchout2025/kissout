@@ -2565,9 +2565,6 @@ h4{font-size:21px;line-height:26px}
 <section id="section1"class="cards-section">
 </section>
 
-<section id="sectionLive"class="cards-section">
-</section>
-
 <section id="section2"class="cards-section">
 </section>
 				
@@ -6478,63 +6475,6 @@ function scrollRightHandler(containerId) {
     container.scrollBy({ left: 950, behavior: 'smooth' });
   }
 }
-// Shared IntersectionObserver for lazy channel section loading
-const _channelObserver = new IntersectionObserver((entries, obs) => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    obs.unobserve(entry.target);
-    const { jsonUrl, heading } = entry.target._lazyMeta;
-    _doRenderChannels(entry.target.id, jsonUrl, heading);
-  });
-}, { rootMargin: '200px 0px' });
-
-function renderChannels(sectionId, jsonUrl, heading) {
-  const section = document.getElementById(sectionId);
-  if (!section) return;
-  section.className = "cards-section";
-
-  section.innerHTML = `
-    <h2>${heading}</h2>
-    <div id="${sectionId}-Wrapper" style="position:relative;">
-      <button class="scroll-button left" onclick="scrollLeftHandler('${sectionId}-Container')">❮</button>
-      <div id="${sectionId}-Container" class="cards-container"></div>
-      <button class="scroll-button right" onclick="scrollRightHandler('${sectionId}-Container')">❯</button>
-    </div>
-  `;
-
-  section._lazyMeta = { jsonUrl, heading };
-  _channelObserver.observe(section);
-}
-
-async function _doRenderChannels(sectionId, jsonUrl, heading) {
-  const section = document.getElementById(sectionId);
-  const container = document.getElementById(`${sectionId}-Container`);
-  if (!container) return;
-
-  try {
-    const response = await fetch(jsonUrl);
-    const channels = await response.json();
-
-    if (!container) return;
-    container.innerHTML = "";
-    section.classList.remove('section-pending');
-
-    channels.forEach(channel => {
-      const card = document.createElement("div");
-      card.className = "live-card";
-      card.onclick = () => openModal(channel.id, "channel");
-
-      card.innerHTML = `
-        <img src="${channel.logoUrl}" alt="${channel.channel_name}" loading="lazy" decoding="async" />
-      `;
-      container.appendChild(card);
-    });
-
-  } catch (error) {
-    console.error(`Failed to load channels from ${jsonUrl}:`, error);
-    if (section) section.classList.remove('section-pending');
-  }
-}
 
 const liveUrl = "https://raw.githubusercontent.com/Watchout2025/RPM-Title-Fixer/refs/heads/main/live.json";
 const mcuUrl = "https://raw.githubusercontent.com/Watchout2025/RPM-Title-Fixer/refs/heads/main/mcu.json";
@@ -6605,12 +6545,11 @@ function renderTVSections(genre) {
   };
 
   renderCollection("section1", withGenre(kdramaUrl), "Korean TV Shows");
-  renderCollection("section2", withGenre(indianTv), "Indian TV Shows");
   renderCollection("section3", withGenre(cdramaUrl), "Chinese TV Shows");
   renderCollection("section4", withGenre(animeUrl), "Anime");
+  renderCollection("section2", withGenre(indianTv), "Indian TV Shows");
   renderCollection("section5", withGenre(usTvUrl), "US TV Shows");
   renderCollection("section6", withGenre(docTv), "Documentary TV Shows");
-
   window.scrollTo(0, 0);
 }
 
@@ -6877,7 +6816,6 @@ async function renderSectionsByCountry() {
 
 // Call this on page load instead of your static render calls
 renderSectionsByCountry();
-renderChannels("sectionLive",liveUrl,"Live TV");
 </script>
 
 
