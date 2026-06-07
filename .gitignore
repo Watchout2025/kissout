@@ -1,0 +1,10 @@
+.ssh/
+.gemini/
+android-sdk/
+.cache/
+.config/
+.gradle/
+.local/
+.npm/
+node_modules/
+.DS_Store
