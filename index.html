@@ -2525,7 +2525,32 @@ h4{font-size:21px;line-height:26px}
             </div>
 
 
+<!--  Popular Korean Drama Shows Widget -->
+  <div class="kd-container">
+  <h2 class="kd-title">Popular Korean Dramas</h2>
+  <div class="kd-relative">
+    <button class="scroll-button left" onclick="scrollLeftHandler('kd-shows-container')">❮</button>
+    <div id="kd-shows-container" class="kd-scroll-container">
+      <!-- TV show cards will be injected here -->
+    </div>
+    <button class="scroll-button right" onclick="scrollRightHandler('kd-shows-container')">❯</button>
+  </div>
+  <div id="kd-error-message" class="kd-error"></div>
+</div>  
 
+
+  <!--  Popular Chinese Drama Shows Widget -->            
+   <div class="cd-container" >
+  <h2 class="cd-title">Popular Chinese Dramas</h2>
+  <div class="cd-relative">
+    <button class="scroll-button left" onclick="scrollLeftHandler('cd-shows-container')">❮</button>
+     <div id="cd-shows-container" class="cd-scroll-container">
+      <!-- TV show cards will be injected here -->
+    </div>
+    <button class="scroll-button right" onclick="scrollRightHandler('cd-shows-container')">❯</button>
+  </div>
+  <div id="cd-error-message" class="cd-error"></div>
+</div>  
 
 <!-- TMDB Trending Movies Widget -->
 <div id="trending-widget" class="cards-section">
@@ -2585,32 +2610,7 @@ h4{font-size:21px;line-height:26px}
               
 
               
-<!--  Popular Korean Drama Shows Widget -->
-  <div class="kd-container">
-  <h2 class="kd-title">Popular Korean Dramas</h2>
-  <div class="kd-relative">
-    <button class="scroll-button left" onclick="scrollLeftHandler('kd-shows-container')">❮</button>
-    <div id="kd-shows-container" class="kd-scroll-container">
-      <!-- TV show cards will be injected here -->
-    </div>
-    <button class="scroll-button right" onclick="scrollRightHandler('kd-shows-container')">❯</button>
-  </div>
-  <div id="kd-error-message" class="kd-error"></div>
-</div>  
 
-
-  <!--  Popular Chinese Drama Shows Widget -->            
-   <div class="cd-container" >
-  <h2 class="cd-title">Popular Chinese Dramas</h2>
-  <div class="cd-relative">
-    <button class="scroll-button left" onclick="scrollLeftHandler('cd-shows-container')">❮</button>
-     <div id="cd-shows-container" class="cd-scroll-container">
-      <!-- TV show cards will be injected here -->
-    </div>
-    <button class="scroll-button right" onclick="scrollRightHandler('cd-shows-container')">❯</button>
-  </div>
-  <div id="cd-error-message" class="cd-error"></div>
-</div>  
 <!--  Popular Japanese Anime Shows Widget -->   
   <div class="ja-container">
   <h2 class="ja-title">Popular Japanese Anime</h2>
